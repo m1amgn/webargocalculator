@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from webpage.views import webpage, calculated
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', webpage),
+    path('calculated/', calculated, name='calculated')
 ]
