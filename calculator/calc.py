@@ -1,52 +1,52 @@
 import matplotlib.pyplot as plt
-from .models import DefaultElementsConcentration, ElementsConsuption
+import io
+from datetime import datetime
+from django.core.files.base import ContentFile
+from .models import ElementsConsuption, Graph
 
 
-type_of_plant = 'Пшеница'
-type = ElementsConsuption.objects.get(culture=type_of_plant)
-productivity = 50
 
-elements_list = []
-concentration_list = []
-consuption_list = []
+COEFFICIENT = float(40 * 1.4 * 0.1 * 100 / (100 - 26.5))
 
-def get_elements_list():
-    elements = list(DefaultElementsConcentration.objects.filter(pk=1).values())
-    for element in elements:
-        for key, values in element.items():
-            if key != 'id':
-                elements_list.append(values)
+def get_elements_list(elements_dict):
+    elements_list = []
+    for key, values in elements_dict.items():
+        if key == 'culture' or key == 'climat_zone' or key == 'productivity':
+            pass
+        else:
+            elements_list.append(key)
     return elements_list
 
-def get_concentration_list():
-    concentration = list(DefaultElementsConcentration.objects.filter(pk=1).values())
-    conc_list = []
-    for conc in concentration:
-        for key, values in conc.items():
-            if key != 'id':
-                conc_list.append(values)
-    coefficient = 40 * 1.4 * 0.1 * 100 / (100 - 26.5)
-    for conc in conc_list:
-        conc = round(float(conc) * coefficient)
-        concentration_list.append(conc)
+def get_concentration_list(elements_dict):
+    concentration_list = []
+    for key, values in elements_dict.items():
+        if key == 'culture' or key == 'climat_zone' or key == 'productivity':
+            pass
+        else:
+            concentration = round(float(values) * COEFFICIENT)
+            concentration_list.append(concentration)
     return concentration_list
 
-def get_consuption_list():
-    consuption = list(ElementsConsuption.objects.filter(pk=1).values())
-    cons_list = []
-    for cons in consuption:
-        for key, values in cons.items():
-            if key != 'id':
-                cons_list.append(values)
-    for cons in cons_list:
-        cons = round(float(cons) * productivity)
-        consuption_list.append(cons)
+def get_consuption_list(elements_dict):
+    consuption_list = []
+    for key, values in elements_dict.items():
+        obj = ElementsConsuption.objects.get(culture=elements_dict['culture'])
+        if key == 'culture' or key == 'climat_zone' or key == 'productivity':
+            pass
+        else:
+            field_object = ElementsConsuption._meta.get_field(key)
+            field_value = field_object.value_from_object(obj)
+            consuption = round(float(field_value) * float(elements_dict['productivity']))
+            consuption_list.append(consuption)
     return consuption_list
 
-def make_graphs():
-    elements_list = get_elements_list()
-    consuption_list = get_consuption_list()
-    concentration_list = get_concentration_list()
+def make_graphs(elements_dict):
+    elements_list = get_elements_list(elements_dict)
+    concentration_list = get_concentration_list(elements_dict)
+    consuption_list = get_consuption_list(elements_dict)
+
+    datetime_now = datetime.now()
+    datetime_now_str = f'{str(datetime_now.day)}{str(datetime_now.month)}{str(datetime_now.year)}-{str(datetime_now.hour)}:{str(datetime_now.minute)}.png'
 
     plt.title('Недостаток элементов')
     plt.xlabel('Элементы')
@@ -55,4 +55,10 @@ def make_graphs():
     plt.bar(elements_list, consuption_list, label='Необходимые элементы', color='blue')
     plt.bar(elements_list, concentration_list, label='Элементы в почве', color='green')
     plt.legend()
-    plt.savefig('graphs.png')
+    f = io.BytesIO()
+    plt.savefig(f)
+    content_file = ContentFile(f.getvalue())
+    model_object = Graph()
+    model_object.graph_img.save(datetime_now_str, content_file)
+    model_object.save()
+    return datetime_now_str

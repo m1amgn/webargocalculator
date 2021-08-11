@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +7,6 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>
-        Отправлено
-        {{ query }}
-    </h1>
+    <img src="/media/{{ graph.graph_img }}">
 </body>
 </html>

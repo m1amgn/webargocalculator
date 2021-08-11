@@ -25,11 +25,11 @@ class VegetationMode(models.Model):
         verbose_name_plural = 'Климатические зоны'
 
 class Productivity(models.Model):
-    productivity = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Урожайность')
     climat_zone = models.ForeignKey(VegetationMode, on_delete=models.CASCADE, null=True)
+    productivity = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Урожайность')
 
     def __str__(self):
-        return self.culture
+        return f'{self.climat_zone}'
 
     class Meta:
         verbose_name = 'Урожайность'
@@ -64,44 +64,25 @@ class ElementsConcentration(models.Model):
         verbose_name = 'Данные из формы'
         verbose_name_plural = 'Данные из формы'
 
+class DefaultElementsConcentration(models.Model):
+    N = models.DecimalField(max_digits=5, decimal_places=2)
+    P2O5 = models.DecimalField(max_digits=5, decimal_places=2)
+    K2O = models.DecimalField(max_digits=5, decimal_places=2)
+    MgO = models.DecimalField(max_digits=5, decimal_places=2)
+    S = models.DecimalField(max_digits=5, decimal_places=2)
+    Ca = models.DecimalField(max_digits=5, decimal_places=2)
+    Fe = models.DecimalField(max_digits=5, decimal_places=2)
+    Mn = models.DecimalField(max_digits=5, decimal_places=2)
+    Zn = models.DecimalField(max_digits=5, decimal_places=2)
+    Cu = models.DecimalField(max_digits=5, decimal_places=2)
+    B = models.DecimalField(max_digits=5, decimal_places=2)
+    Mo = models.DecimalField(max_digits=5, decimal_places=2)
+    Co = models.DecimalField(max_digits=5, decimal_places=2)
+    Se = models.DecimalField(max_digits=5, decimal_places=2)
 
+    def __str__(self):
+        return f'Концентрация элементов по умолчанию'
 
-
-    # first_name = models.CharField(_('First Name'),
-    #                     max_length = 200,
-    #                     help_text = _('What is your name?'))
-    #
-    # last_name = models.CharField(_('Last Name'),
-    #                     max_length = 200,
-    #                     help_text = _('What is your name?'))
-
-
-# created_timestamp = models.DateTimeField(auto_now_add=True)
-# class Meta:
-#     model=someForm
-#     fields=['Dropdown']
-#    widgets = {
-#      'Dropdown': forms.Select(attrs={'id':'choicewa'}),
-#      }
-
-
-
-
-# def create(request):
-#     if request.POST:
-#         form = ArticleForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect('/articles/all/')
-#     else:
-#         form = ArticleForm()
-#         args={}
-#         args.update(csrf(request))
-#         args['categories'] = ArticleCategory.objects.all()
-#         args['form'] = form
-#         return render_to_response('create_article.html', args)
-#
-
-# Вам не нужно делать это вручную. Если ваш ArticleForm равен ModelForm и не исключает поле category ,
-# то вы можете просто написать {{ form.category }} и автоматически получить выпадающий список, созданный django.
-# Он использует ModelChoiceField под капотом.
+    class Meta:
+        verbose_name = 'Содержание элементов по умолчанию'
+        verbose_name_plural = 'Содержание элементов по умолчанию'
