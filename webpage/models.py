@@ -68,7 +68,7 @@ class DefaultElementsConcentration(models.Model):
     N = models.DecimalField(max_digits=5, decimal_places=2)
     P2O5 = models.DecimalField(max_digits=5, decimal_places=2)
     K2O = models.DecimalField(max_digits=5, decimal_places=2)
-    MgO = models.DecimalField(max_digits=5, decimal_places=2)
+    Mg = models.DecimalField(max_digits=5, decimal_places=2)
     S = models.DecimalField(max_digits=5, decimal_places=2)
     Ca = models.DecimalField(max_digits=5, decimal_places=2)
     Fe = models.DecimalField(max_digits=5, decimal_places=2)

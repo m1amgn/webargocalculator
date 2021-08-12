@@ -5,7 +5,6 @@ from calculator.calc import make_graphs
 from calculator.models import Graph
 
 
-
 # Create your views here.
 def webpage(request):
     form = CalculateForms()
@@ -13,7 +12,6 @@ def webpage(request):
 
 def calculated(request):
     elements_dict = {}
-
     for key, values in request.POST.dict().items():
         if values == '' or values == '0':
             if key == 'productivity':
@@ -42,12 +40,8 @@ def calculated(request):
                 elements_dict_add = {key: values}
                 elements_dict.update(elements_dict_add)
 
-    del elements_dict['csrfmiddlewaretoken']
-
     make_graphs(elements_dict)
-
     context = {'graph': Graph.objects.latest('created_timestamp')}
-
     ElementsConcentration.objects.create(culture=elements_dict['culture'], climat_zone=elements_dict['climat_zone'],
                                         N=elements_dict['N'], P2O5=elements_dict['P2O5'], K2O=elements_dict['K2O'],
                                         Mg=elements_dict['Mg'], S=elements_dict['S'], Ca=elements_dict['Ca'],
@@ -58,4 +52,5 @@ def calculated(request):
                                         # temperature=elements_dict['temperature'],
                                         productivity=elements_dict['productivity'])
 
+    elements_dict.clear()
     return render(request, 'calculated.html', context)

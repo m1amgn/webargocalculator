@@ -5,13 +5,12 @@ from django.core.files.base import ContentFile
 from .models import ElementsConsuption, Graph
 
 
-
 COEFFICIENT = float(40 * 1.4 * 0.1 * 100 / (100 - 26.5))
 
 def get_elements_list(elements_dict):
     elements_list = []
     for key, values in elements_dict.items():
-        if key == 'culture' or key == 'climat_zone' or key == 'productivity':
+        if key == 'culture' or key == 'climat_zone' or key == 'productivity' or key == 'csrfmiddlewaretoken':
             pass
         else:
             elements_list.append(key)
@@ -20,7 +19,7 @@ def get_elements_list(elements_dict):
 def get_concentration_list(elements_dict):
     concentration_list = []
     for key, values in elements_dict.items():
-        if key == 'culture' or key == 'climat_zone' or key == 'productivity':
+        if key == 'culture' or key == 'climat_zone' or key == 'productivity' or key == 'csrfmiddlewaretoken':
             pass
         else:
             concentration = round(float(values) * COEFFICIENT)
@@ -31,7 +30,7 @@ def get_consuption_list(elements_dict):
     consuption_list = []
     for key, values in elements_dict.items():
         obj = ElementsConsuption.objects.get(culture=elements_dict['culture'])
-        if key == 'culture' or key == 'climat_zone' or key == 'productivity':
+        if key == 'culture' or key == 'climat_zone' or key == 'productivity' or key == 'csrfmiddlewaretoken':
             pass
         else:
             field_object = ElementsConsuption._meta.get_field(key)
@@ -46,7 +45,7 @@ def make_graphs(elements_dict):
     consuption_list = get_consuption_list(elements_dict)
 
     datetime_now = datetime.now()
-    datetime_now_str = f'{str(datetime_now.day)}{str(datetime_now.month)}{str(datetime_now.year)}-{str(datetime_now.hour)}:{str(datetime_now.minute)}.png'
+    datetime_now_str = f'{str(datetime_now.day)}{str(datetime_now.month)}{str(datetime_now.year)}-{str(datetime_now.hour)}-{str(datetime_now.minute)}-{str(datetime_now.second)}.png'
 
     plt.title('Недостаток элементов')
     plt.xlabel('Элементы')
@@ -61,4 +60,4 @@ def make_graphs(elements_dict):
     model_object = Graph()
     model_object.graph_img.save(datetime_now_str, content_file)
     model_object.save()
-    return datetime_now_str
+    plt.close()
