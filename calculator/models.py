@@ -7,8 +7,8 @@ from webpage.models import Culture
 class ElementsConsuption(models.Model):
     culture = models.ForeignKey(Culture, on_delete=models.CASCADE, null=True)
     N = models.DecimalField(max_digits=5, decimal_places=2)
-    P2O5 = models.DecimalField(max_digits=5, decimal_places=2)
-    K2O = models.DecimalField(max_digits=5, decimal_places=2)
+    P = models.DecimalField(max_digits=5, decimal_places=2)
+    K = models.DecimalField(max_digits=5, decimal_places=2)
     Mg = models.DecimalField(max_digits=5, decimal_places=2)
     S = models.DecimalField(max_digits=5, decimal_places=2)
     Ca = models.DecimalField(max_digits=5, decimal_places=2)

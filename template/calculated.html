@@ -1,12 +1,36 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <img src="/media/{{ graph.graph_img }}">
-</body>
-</html>
+{% block content %}
+    <section class="agrocalculator">
+        <a name="agrocalculator"></a>
+        <div class="graph">
+            <img src="/media/{{ graph.graph_img }}">
+        </div>
+        <div class="elements-table">
+            <table>
+              <tbody>
+                <tr>
+                  <td></td>
+                    {% for element in elements_list %}
+                      <td width="40px">{{ element }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                  <td>Доступные элементы в почве, кг/га</td>
+                    {% for concentration in concentration_list %}
+                      <td width="40px">{{ concentration }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                  <td>Необходимая концентрация элементов питания, кг/га</td>
+                    {% for consuption in consuption_list %}
+                      <td width="40px">{{ consuption }}</td>
+                    {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+    </section>
+{% endblock %}

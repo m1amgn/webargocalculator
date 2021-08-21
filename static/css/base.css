@@ -1,0 +1,160 @@
+html {
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	margin: 0 auto;
+	max-width: 1700px;
+}
+
+.header-label-nav {
+	background-color: rgb(0,190,155);
+}
+
+.label-nav {
+	max-width: 92%;
+	margin: 0 auto;
+	height: 60px;
+	text-align: justify;
+}
+
+.label-nav:after {
+	content: "";
+	display: inline-block;
+	width: 93%;
+}
+
+.label {
+	display: inline-block;
+	color: rgb(202,255,255);
+	font-size: 26.18px;
+	vertical-align: middle;
+	line-height: 55px;
+	font-weight: 800;
+}
+
+.label span {
+	color: rgb(255,255,255);
+}
+
+header-center {
+	text-align: center;
+	max-height: 500px;
+	max-width: 100%;
+}
+
+.header-center img {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.agrocalculator {
+	text-align: center;
+	max-width: 80%;
+	margin: 0 auto;
+}
+
+.agrocalculator h2 {
+	font-size: 40px;
+	color: rgb(0,190,155);
+	margin: 0;
+	padding-top: 50px;
+	padding-bottom: 15px;
+}
+
+.agrocalculator p {
+	margin: 0;
+	color: rgb(126,130,135);
+}
+
+.agrocalculator-article p {
+	font-size: 14px;
+	color: rgb(126,130,135);
+	line-height: 2.5em;
+}
+
+.agrocalculator-article {
+	margin: 0 auto;
+}
+
+form {
+    font-size: 14px;
+    color: rgb(126,130,135);
+	line-height: 2.5em;
+	max-width: 100%;
+	margin-top: 20px;
+	max-width: 100%;
+}
+
+.left-form {
+    display: inline-block;
+    text-align: left;
+    width: 40%;
+}
+
+.right-form {
+    display: inline-block;
+    text-align: right;
+    width: 40%;
+}
+
+.button {
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px
+}
+
+.btn {
+    top: 50%;
+    left: 50%;
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: rgb(0,190,155);
+    color: white;
+}
+
+.graph {
+    display: inline-block;
+    text-align: left;
+}
+
+.elements-table {
+    margin-top: 30px;
+    display: inline-block;
+    height: 450px;
+ }
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td:first-child {
+    background: rgb(0,190,155);
+    color: white;
+    padding: 10px 20px;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+
+td {
+    background: rgb(164,219,178);
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}

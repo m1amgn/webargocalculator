@@ -39,8 +39,8 @@ class ElementsConcentration(models.Model):
     culture = models.ForeignKey(Culture, on_delete=models.CASCADE, null=True)
     climat_zone = models.ForeignKey(VegetationMode, on_delete=models.CASCADE, null=True)
     N = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    P2O5 = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    K2O = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    P = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    K = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     Mg = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     S = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     Ca = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
@@ -66,8 +66,8 @@ class ElementsConcentration(models.Model):
 
 class DefaultElementsConcentration(models.Model):
     N = models.DecimalField(max_digits=5, decimal_places=2)
-    P2O5 = models.DecimalField(max_digits=5, decimal_places=2)
-    K2O = models.DecimalField(max_digits=5, decimal_places=2)
+    P = models.DecimalField(max_digits=5, decimal_places=2)
+    K = models.DecimalField(max_digits=5, decimal_places=2)
     Mg = models.DecimalField(max_digits=5, decimal_places=2)
     S = models.DecimalField(max_digits=5, decimal_places=2)
     Ca = models.DecimalField(max_digits=5, decimal_places=2)

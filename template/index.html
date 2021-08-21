@@ -1,15 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Привет</h1>
-    <form action="{% url 'calculated' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">ОТПРАВИТЬ</button>
-    </form>
-</body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="agrocalculator">
+        <a name="agrocalculator"></a>
+        <article>
+            <h2>Калькулятор удобрений</h2>
+            <div class="agrocalculator-article">
+                <p>Калькулятор удобрений поможет рассчитать необходимое количество элементов питания растений в зависимости от планируемой урожайности и условий вегетации. Алгоритмы расчёта базируются на методических рекомендациях по внесению элементов питания и результатах опытных исследований Российских и зарубежных агрохимических университетов.</p>
+                <p>Фундаментельным принципом проведения расчёта является Закон ограничивающего (лимитирующего) фактора или Закон минимума Либих - один из фундаментальных законов в биологии, гласящий, что наиболее значим для организма тот фактор, который более всего отклоняется от оптимального его значения. Иными словами, продуктивность культурных растений, в первую очередь, зависит от того питательного вещества (минерального элемента), который представлен в почве наиболее слабо.</p>
+            </div>
+        </article>
+            <form action="{% url 'calculated' %}" method="post">
+                {% csrf_token %}
+                <div class="forms">
+                    <div class="left-form">
+                        <div>{{ form.culture.label }}</div>
+                        <div>{{ form.culture }}</div>
+                        <div>{{ form.climat_zone.label }}</div>
+                        <div>{{ form.climat_zone }}</div>
+                        <div>{{ form.quantity_of_water.label }}</div>
+                        <div>{{ form.quantity_of_water }}</div>
+                        <div>{{ form.temperature.label }}</div>
+                        <div>{{ form.temperature }}</div>
+                        <div>{{ form.productivity.label }}</div>
+                        <div>{{ form.productivity }}</div>
+                        <div>{{ form.N.label }}</div>
+                        <div>{{ form.N }}</div>
+                        <div>{{ form.P.label }}</div>
+                        <div>{{ form.P }}</div>
+                        <div>{{ form.K.label }}</div>
+                        <div>{{ form.K }}</div>
+                        <div>{{ form.Mg.label }}</div>
+                        <div>{{ form.Mg }}</div>
+                        <div>{{ form.S.label }}</div>
+                        <div>{{ form.S }}</div>
+                    </div>
+                    <div class="right-form">
+                        <div>{{ form.Ca.label }}</div>
+                        <div>{{ form.Ca }}</div>
+                        <div>{{ form.Fe.label }}</div>
+                        <div>{{ form.Fe }}</div>
+                        <div>{{ form.Mn.label }}</div>
+                        <div>{{ form.Mn }}</div>
+                        <div>{{ form.Zn.label }}</div>
+                        <div>{{ form.Zn }}</div>
+                        <div>{{ form.Cu.label }}</div>
+                        <div>{{ form.Cu }}</div>
+                        <div>{{ form.B.label }}</div>
+                        <div>{{ form.B }}</div>
+                        <div>{{ form.Mo.label }}</div>
+                        <div>{{ form.Mo }}</div>
+                        <div>{{ form.Co.label }}</div>
+                        <div>{{ form.Co }}</div>
+                        <div>{{ form.Se.label }}</div>
+                        <div>{{ form.Se }}</div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button class="btn" type="submit">РАССЧИТАТЬ</button>
+                </div>
+            </form>
+    </section>
+{% endblock %}
 </html>
