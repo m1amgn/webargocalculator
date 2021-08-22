@@ -22,7 +22,7 @@ def get_concentration_list(elements_dict):
         if key == 'culture' or key == 'climat_zone' or key == 'productivity' or key == 'csrfmiddlewaretoken' or key == 'quantity_of_water' or key == 'temperature':
             pass
         else:
-            concentration = round(float(values) * COEFFICIENT)
+            concentration = round(float(values) * COEFFICIENT, 2)
             concentration_list.append(concentration)
     return concentration_list
 
@@ -35,7 +35,7 @@ def get_consuption_list(elements_dict):
         else:
             field_object = ElementsConsuption._meta.get_field(key)
             field_value = field_object.value_from_object(obj)
-            consuption = round(float(field_value) * float(elements_dict['productivity']))
+            consuption = round(float(field_value) * float(elements_dict['productivity']), 1)
             consuption_list.append(consuption)
     return consuption_list
 

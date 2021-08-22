@@ -13,24 +13,23 @@
                 <tr>
                   <td></td>
                     {% for element in elements_list %}
-                      <td width="40px">{{ element }}</td>
+                      <td width="50px">{{ element }}</td>
                     {% endfor %}
                 </tr>
                 <tr>
                   <td>Доступные элементы в почве, кг/га</td>
                     {% for concentration in concentration_list %}
-                      <td width="40px">{{ concentration }}</td>
+                      <td width="50px">{{ concentration }}</td>
                     {% endfor %}
                 </tr>
                 <tr>
                   <td>Необходимая концентрация элементов питания, кг/га</td>
                     {% for consuption in consuption_list %}
-                      <td width="40px">{{ consuption }}</td>
+                      <td width="50px">{{ consuption }}</td>
                     {% endfor %}
                 </tr>
               </tbody>
             </table>
         </div>
-
     </section>
 {% endblock %}

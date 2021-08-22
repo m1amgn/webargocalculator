@@ -3,11 +3,11 @@ from .models import Culture, VegetationMode
 
 
 class CalculateForms(forms.Form):
-    culture = forms.ModelChoiceField(label='Культура', queryset=Culture.objects.all())
-    climat_zone = forms.ModelChoiceField(label='Климатическая зона', queryset=VegetationMode.objects.all())
-    quantity_of_water = forms.DecimalField(label='Среднее количество осадков за период вегетации, мм', max_digits=5, decimal_places=2, min_value=0)
-    temperature = forms.DecimalField(label='Средняя температура за период вегетации, С', max_digits=5, decimal_places=2, min_value=0)
-    productivity = forms.DecimalField(label='Планируемая урожайность, ц/га', max_digits=5, decimal_places=2, min_value=0)
+    culture = forms.ModelChoiceField(label='Культура*', queryset=Culture.objects.all())
+    climat_zone = forms.ModelChoiceField(label='Климатическая зона*', queryset=VegetationMode.objects.all())
+    quantity_of_water = forms.DecimalField(label='Среднее количество осадков за период вегетации, мм*', max_digits=5, decimal_places=2, min_value=0)
+    temperature = forms.DecimalField(label='Средняя температура за период вегетации, С*', max_digits=5, decimal_places=2, min_value=0)
+    productivity = forms.DecimalField(label='Планируемая урожайность, ц/га*', max_digits=5, decimal_places=2, min_value=0)
     N = forms.DecimalField(label='Концентрация азота в почве, мг/кг', max_digits=5, decimal_places=2, min_value=0, required=False)
     P = forms.DecimalField(label='Концентрация фосфора в почве, мг/кг', max_digits=5, decimal_places=2, min_value=0, required=False)
     K = forms.DecimalField(label='Концентрация калия в почве, мг/кг', max_digits=5, decimal_places=2, min_value=0, required=False)
