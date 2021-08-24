@@ -15,36 +15,39 @@ def webpage(request):
 
 def calculated(request):
     elements_dict = {}
-    for key, values in request.POST.dict().items():
-        if values == '' or values == '0':
-            if key == 'productivity':
-                climat_zone = request.POST['climat_zone']
-                obj = Productivity.objects.get(pk=climat_zone)
-                field_object = Productivity._meta.get_field(key)
-                field_value = field_object.value_from_object(obj)
-                elements_dict_add = {key: field_value}
-                elements_dict.update(elements_dict_add)
-            elif key == 'quantity_of_water' or key == 'temperature':
-                elements_dict_add = {key: values}
-                elements_dict.update(elements_dict_add)
+    try:
+        for key, values in request.POST.dict().items():
+            if values == '' or values == '0':
+                if key == 'productivity':
+                    climat_zone = request.POST['climat_zone']
+                    obj = Productivity.objects.get(pk=climat_zone)
+                    field_object = Productivity._meta.get_field(key)
+                    field_value = field_object.value_from_object(obj)
+                    elements_dict_add = {key: field_value}
+                    elements_dict.update(elements_dict_add)
+                elif key == 'quantity_of_water' or key == 'temperature':
+                    elements_dict_add = {key: values}
+                    elements_dict.update(elements_dict_add)
+                else:
+                    obj = DefaultElementsConcentration.objects.first()
+                    field_object = DefaultElementsConcentration._meta.get_field(key)
+                    field_value = field_object.value_from_object(obj)
+                    elements_dict_add = {key: field_value}
+                    elements_dict.update(elements_dict_add)
             else:
-                obj = DefaultElementsConcentration.objects.first()
-                field_object = DefaultElementsConcentration._meta.get_field(key)
-                field_value = field_object.value_from_object(obj)
-                elements_dict_add = {key: field_value}
-                elements_dict.update(elements_dict_add)
-        else:
-            if key == 'culture':
-                culture = Culture.objects.get(pk=values)
-                elements_dict_add = {key: culture}
-                elements_dict.update(elements_dict_add)
-            elif key == 'climat_zone':
-                climat_zone = VegetationMode.objects.get(pk=values)
-                elements_dict_add = {key: climat_zone}
-                elements_dict.update(elements_dict_add)
-            else:
-                elements_dict_add = {key: values}
-                elements_dict.update(elements_dict_add)
+                if key == 'culture':
+                    culture = Culture.objects.get(pk=values)
+                    elements_dict_add = {key: culture}
+                    elements_dict.update(elements_dict_add)
+                elif key == 'climat_zone':
+                    climat_zone = VegetationMode.objects.get(pk=values)
+                    elements_dict_add = {key: climat_zone}
+                    elements_dict.update(elements_dict_add)
+                else:
+                    elements_dict_add = {key: values}
+                    elements_dict.update(elements_dict_add)
+    except Exception as e:
+        print(e)
 
     make_graphs(elements_dict)
     elements_list = get_elements_list(elements_dict)

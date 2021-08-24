@@ -15,12 +15,9 @@ def send_telegram(tg_name, tg_email):
 			part_1 = text[0:text.find('{')]
 			part_2 = text[text.find('}') + 1:text.rfind('{')]
 			part_3 = text[text.rfind('}'):-1]
-
 			text_slise = part_1 + tg_name + part_2 + tg_email + part_3
-
 		else:
 			text_slise = text
-
 		try:
 			req = requests.post(method, data={
 				'chat_id': chat_id,
