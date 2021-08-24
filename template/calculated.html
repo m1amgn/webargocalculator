@@ -31,5 +31,27 @@
               </tbody>
             </table>
         </div>
+        <div class="elements-description">
+            {% for description in elements_description %}
+            <p>{{ description.name }} - {{ description.description }}</p>
+            {% endfor %}
+        </div>
     </section>
+{% endblock %}
+{% block footer %}
+  	<footer>
+  		<div class="agrocalculator-article">
+            <p>Для получения бесплатной консультации по подбору удобрений на основе полученного расчёта, заполните форму обратной связи, и мы свяжемся с Вами в ближайшее время.</p>
+  		</div>
+  		<form action="{% url 'get_order' %}" method="post">
+            {% csrf_token %}
+            <div class="forms">
+                <div>{{ form.name.label }} {{ form.name }}</div>
+                <div>{{ form.email.label }} {{ form.email }}</div>
+            </div>
+            <div class="button">
+                <button class="btn" type="submit">ОТПРАВИТЬ</button>
+            </div>
+   		</form>
+  	</footer>
 {% endblock %}

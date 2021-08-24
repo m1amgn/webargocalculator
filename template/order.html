@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="agrocalculator">
+        <article> <h2>Ваш запрос отправлен!</h2>
+            <div class="agrocalculator-article">
+                <p>{{ name }}, спасибо за Ваш запрос. Мы ответим Вам в ближайшее время.</p>
+                <a href="{% url 'webgage' %}">Главная страница</a>
+            </div>
+        </article>
+    </section>
+{% endblock %}

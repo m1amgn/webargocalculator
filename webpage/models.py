@@ -86,3 +86,15 @@ class DefaultElementsConcentration(models.Model):
     class Meta:
         verbose_name = 'Содержание элементов по умолчанию'
         verbose_name_plural = 'Содержание элементов по умолчанию'
+
+class ElementsDescription(models.Model):
+    name = models.CharField(max_length=20, verbose_name='Название элемента', blank=True, null=True)
+    description = models.TextField(verbose_name='Описание элемента', blank=True, null=True)
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Описание элемента'
+        verbose_name_plural = 'Описание элементов'

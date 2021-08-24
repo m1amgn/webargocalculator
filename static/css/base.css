@@ -129,9 +129,9 @@ form {
 }
 
 .elements-table {
-    margin-top: 30px;
+    margin-top: 50px;
     display: inline-block;
-    height: 450px;
+    margin-bottom: 50px;
  }
 
 table {
@@ -157,4 +157,17 @@ td {
 
 th:first-child, td:first-child {
     text-align: left;
+}
+
+.elements-description p {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+footer {
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
 }

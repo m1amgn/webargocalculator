@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from .forms import CalculateForms
-from .models import ElementsConcentration, Culture, VegetationMode, DefaultElementsConcentration, Productivity
+from .models import ElementsConcentration, Culture, VegetationMode, DefaultElementsConcentration, Productivity, ElementsDescription
 from calculator.calc import make_graphs, get_elements_list, get_concentration_list, get_consuption_list
 from calculator.models import Graph
+from orders.sendmessage import send_telegram
+from orders.models import Order
+from orders.forms import OrderForm
 
 
 # Create your views here.
@@ -47,22 +50,35 @@ def calculated(request):
     elements_list = get_elements_list(elements_dict)
     concentration_list = get_concentration_list(elements_dict)
     consuption_list = get_consuption_list(elements_dict)
+    form = OrderForm()
 
     context = {'graph': Graph.objects.latest('created_timestamp'),
                'elements_list': elements_list,
                'concentration_list': concentration_list,
-               'consuption_list': consuption_list
+               'consuption_list': consuption_list,
+               'elements_description': ElementsDescription.objects.all(),
+               'form': form,
                }
-
-    ElementsConcentration.objects.create(culture=elements_dict['culture'], climat_zone=elements_dict['climat_zone'],
-                                        N=elements_dict['N'], P=elements_dict['P'], K=elements_dict['K'],
-                                        Mg=elements_dict['Mg'], S=elements_dict['S'], Ca=elements_dict['Ca'],
-                                        Fe=elements_dict['Fe'], Mn=elements_dict['Mn'], Zn=elements_dict['Zn'],
-                                        Cu=elements_dict['Cu'], B=elements_dict['B'], Mo=elements_dict['Mo'],
-                                        Co=elements_dict['Co'], Se=elements_dict['Se'],
-                                        quantity_of_water=elements_dict['quantity_of_water'],
-                                        temperature=elements_dict['temperature'],
-                                        productivity=elements_dict['productivity'])
+    try:
+        ElementsConcentration.objects.create(culture=elements_dict['culture'], climat_zone=elements_dict['climat_zone'],
+                                            N=elements_dict['N'], P=elements_dict['P'], K=elements_dict['K'],
+                                            Mg=elements_dict['Mg'], S=elements_dict['S'], Ca=elements_dict['Ca'],
+                                            Fe=elements_dict['Fe'], Mn=elements_dict['Mn'], Zn=elements_dict['Zn'],
+                                            Cu=elements_dict['Cu'], B=elements_dict['B'], Mo=elements_dict['Mo'],
+                                            Co=elements_dict['Co'], Se=elements_dict['Se'],
+                                            quantity_of_water=elements_dict['quantity_of_water'],
+                                            temperature=elements_dict['temperature'],
+                                            productivity=elements_dict['productivity'])
+    except Exception as e:
+        print(e)
 
     elements_dict.clear()
     return render(request, 'calculated.html', context)
+
+def get_order(request):
+        name = request.POST['name']
+        email = request.POST['email']
+        order = Order(name=name, email=email)
+        order.save()
+        send_telegram(tg_name=name, tg_email=email)
+        return render(request, 'order.html', {'name': name})

@@ -18,12 +18,13 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from webpage.views import webpage, calculated
+from webpage.views import webpage, calculated, get_order
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', webpage),
-    path('calculated/', calculated, name='calculated')
+    path('', webpage, name='webgage'),
+    path('calculated/', calculated, name='calculated'),
+    path('order/', get_order, name='get_order'),
 ]
 
 if settings.DEBUG:
