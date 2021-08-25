@@ -5,7 +5,13 @@ from django.core.files.base import ContentFile
 from .models import ElementsConsuption, Graph
 
 
-COEFFICIENT = float(40 * 1.4 * 0.1 * 100 / (100 - 26.5))
+COEFFICIENT = float(40 * 1.4 * 0.1 * 100 / (100 - 26.5) * 0.15)
+'''
+40 - hD average layer depth cm
+1.4 - average density g/cm3
+26.5 - average moisture %
+0.15 - average availability of elements
+'''
 
 def get_elements_list(elements_dict):
     elements_list = []
@@ -42,7 +48,7 @@ def get_consuption_list(elements_dict):
             else:
                 field_object = ElementsConsuption._meta.get_field(key)
                 field_value = field_object.value_from_object(obj)
-                consuption = round(float(field_value) * float(elements_dict['productivity']), 1)
+                consuption = round(float(field_value) * float(elements_dict['productivity']), 2)
                 consuption_list.append(consuption)
         return consuption_list
     except Exception as e:

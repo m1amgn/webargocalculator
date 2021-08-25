@@ -68,7 +68,7 @@ def calculated(request):
                                             Mg=elements_dict['Mg'], S=elements_dict['S'], Ca=elements_dict['Ca'],
                                             Fe=elements_dict['Fe'], Mn=elements_dict['Mn'], Zn=elements_dict['Zn'],
                                             Cu=elements_dict['Cu'], B=elements_dict['B'], Mo=elements_dict['Mo'],
-                                            Co=elements_dict['Co'], Se=elements_dict['Se'],
+                                            Co=elements_dict['Co'], Ni=elements_dict['Ni'], Se=elements_dict['Se'],
                                             quantity_of_water=elements_dict['quantity_of_water'],
                                             temperature=elements_dict['temperature'],
                                             productivity=elements_dict['productivity'])
