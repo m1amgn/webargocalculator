@@ -79,9 +79,9 @@ def calculated(request):
     return render(request, 'calculated.html', context)
 
 def get_order(request):
-        name = request.POST['name']
-        email = request.POST['email']
-        order = Order(name=name, email=email)
-        order.save()
-        send_telegram(tg_name=name, tg_email=email)
-        return render(request, 'order.html', {'name': name})
+    name = request.POST['name']
+    email = request.POST['email']
+    order = Order(name=name, email=email)
+    order.save()
+    send_telegram(tg_name=name, tg_email=email)
+    return render(request, 'order.html', {'name': name})
