@@ -25,13 +25,5 @@ def send_telegram(tg_name, tg_email):
 			})
 		except:
 			pass
-
-		finally:
-			if req.status_code != 200:
-				print('Ошибка отправки!')
-			elif req.status_code == 500:
-				print('Ошибка 500')
-			else:
-				print('Всё Ок сообщение отправлено!')
 	else:
 		pass
